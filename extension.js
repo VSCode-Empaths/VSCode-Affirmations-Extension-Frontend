@@ -45,8 +45,18 @@ async function activate(context) {
       vscode.window.showInformationMessage(tddAffirmations[randomNumber].text);
     }
   );
+  let willCommand = await vscode.commands.registerCommand(
+    "error_affirmations.getAffirmation(WTGO)",
+    async function () {
+      const willAffirmations = affirmations.filter(
+        (row) => row.category_id == 4
+      );
+      const randomNumber = Math.floor(Math.random() * willAffirmations.length);
+      vscode.window.showInformationMessage(willAffirmations[randomNumber].text);
+    }
+  );
 
-  context.subscriptions.push(errorCommand, tddCommand);
+  context.subscriptions.push(errorCommand, tddCommand, willCommand);
 }
 
 // This method is called when your extension is deactivated

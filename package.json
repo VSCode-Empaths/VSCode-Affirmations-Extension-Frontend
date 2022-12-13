@@ -12,6 +12,7 @@
   "activationEvents": [
     "onCommand:error_affirmations.getAffirmation(error)",
     "onCommand:error_affirmations.getAffirmation(TDD)",
+    "onCommand:error_affirmations.getAffirmation(WTGO)",
     "onStartupFinished"
   ],
   "main": "./extension.js",
@@ -24,6 +25,10 @@
       {
         "command": "error_affirmations.getAffirmation(TDD)",
         "title": "Get a TDD affirmation!"
+      },
+      {
+        "command": "error_affirmations.getAffirmation(WTGO)",
+        "title": "Get a will to go on affirmation!"
       }
     ]
   },
