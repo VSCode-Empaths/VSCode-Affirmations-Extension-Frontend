@@ -16,7 +16,7 @@ A general affirmation pops up on launch of VSCode.
 
 ### **Commands**
 
-Throughout the day when you feel like you need an affirmation, you can fn+F1 to open the command palette and select an affirmation by category("Get an error affirmation", "Get a TDD affirmation", or "Get a will to go on affirmation").
+Throughout the day when you feel like you need an affirmation, you can fn+F1 to open the command palette and select an affirmation by category ("Get an error affirmation", "Get a TDD affirmation", or "Get a will to go on affirmation").
 
 ## **Meet the team**
 
