@@ -3,7 +3,7 @@
   "displayName": "Error Affirmations",
   "publisher": "VSCodeEmpaths",
   "description": "Error Affirmations is a VSCode extension that give you much needed code-related affirmations.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.74.0"
   },
