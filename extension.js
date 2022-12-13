@@ -14,6 +14,14 @@ async function activate(context) {
     // This line of code will only be executed once when your extension is activated
     console.log('Congratulations, your extension "helloworld" is now active!');
 
+    // setInterval(timerTick, 10000);
+    await timerTick();
+    async function timerTick() {
+        const randomNumber = Math.floor(Math.random() * 10);
+        const affirmations = await fetchAffirmations();
+        vscode.window.showInformationMessage(affirmations[randomNumber].text);
+    }
+
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
     // The commandId parameter must match the command field in package.json
@@ -21,6 +29,7 @@ async function activate(context) {
         "helloworld.helloWorld",
         async function () {
             // The code you place here will be executed every time your command is executed
+
             const randomNumber = Math.floor(Math.random() * 10);
 
             const affirmations = await fetchAffirmations();

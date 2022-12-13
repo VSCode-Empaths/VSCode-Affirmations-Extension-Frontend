@@ -10,7 +10,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:helloworld.helloWorld"
+        "onCommand:helloworld.helloWorld",
+        "onStartupFinished"
     ],
     "main": "./extension.js",
     "contributes": {
