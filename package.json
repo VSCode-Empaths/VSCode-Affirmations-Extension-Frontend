@@ -1,6 +1,7 @@
 {
-  "name": "error_affirmations",
+  "name": "erroraffirmations",
   "displayName": "error_affirmations",
+  "publisher": "VSCodeEmpaths",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -50,5 +51,9 @@
   },
   "dependencies": {
     "cross-fetch": "^3.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VSCode-Empaths/VSCode-Affirmations-Extension-Frontend"
   }
 }
