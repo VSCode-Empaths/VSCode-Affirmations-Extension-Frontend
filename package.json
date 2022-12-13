@@ -11,6 +11,7 @@
   ],
   "activationEvents": [
     "onCommand:error_affirmations.getAffirmation(error)",
+    "onCommand:error_affirmations.getAffirmation(TDD)",
     "onStartupFinished"
   ],
   "main": "./extension.js",
@@ -19,6 +20,10 @@
       {
         "command": "error_affirmations.getAffirmation(error)",
         "title": "Get an error affirmation!"
+      },
+      {
+        "command": "error_affirmations.getAffirmation(TDD)",
+        "title": "Get a TDD affirmation!"
       }
     ]
   },

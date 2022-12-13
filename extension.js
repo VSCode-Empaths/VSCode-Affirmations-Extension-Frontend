@@ -23,7 +23,7 @@ async function activate(context) {
   vscode.window.showInformationMessage(dailyAffirmations[randomNumber].text);
 
   // TODO FETCH ALL Affirmations by category.id (2 - Error)
-  let disposable = await vscode.commands.registerCommand(
+  let errorCommand = await vscode.commands.registerCommand(
     "error_affirmations.getAffirmation(error)",
     async function () {
       const errorAffirmations = affirmations.filter(
@@ -35,8 +35,18 @@ async function activate(context) {
       );
     }
   );
+  let tddCommand = await vscode.commands.registerCommand(
+    "error_affirmations.getAffirmation(TDD)",
+    async function () {
+      const tddAffirmations = affirmations.filter(
+        (row) => row.category_id == 3
+      );
+      const randomNumber = Math.floor(Math.random() * tddAffirmations.length);
+      vscode.window.showInformationMessage(tddAffirmations[randomNumber].text);
+    }
+  );
 
-  context.subscriptions.push(disposable);
+  context.subscriptions.push(errorCommand, tddCommand);
 }
 
 // This method is called when your extension is deactivated
