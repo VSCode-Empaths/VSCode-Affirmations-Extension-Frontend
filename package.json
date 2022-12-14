@@ -31,6 +31,13 @@
         "command": "error_affirmations.getAffirmation(WTGO)",
         "title": "Get a will to go on affirmation!"
       }
+    ],
+    "productIconThemes": [
+      {
+        "id": "affirmationsTheme",
+        "label": "Affirmations Theme",
+        "path": ".productions/affirmations-product-icon-theme.json"
+      }
     ]
   },
   "scripts": {

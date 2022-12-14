@@ -1,0 +1,20 @@
+{
+  "fonts": [
+    {
+      "id": "affirmation-font",
+      "src": [
+        {
+          "path": "./menlo.woff",
+          "format": "woff"
+        }
+      ],
+      "weight": "500",
+      "style": "normal"
+    }
+  ],
+  "iconDefinitions": {
+    "extensions-info-message": {
+      "fontId": "affirmation-font"
+    }
+  }
+}
