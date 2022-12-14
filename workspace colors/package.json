@@ -1,0 +1,21 @@
+{
+  "name": "affirmation-pink",
+  "displayName": "affirmation-pink",
+  "description": "A pink theme for affirming",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Aff Pink",
+        "uiTheme": "vs-dark",
+        "path": "./themes/Aff Pink-color-theme.json"
+      }
+    ]
+  }
+}
