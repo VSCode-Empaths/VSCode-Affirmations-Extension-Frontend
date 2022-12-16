@@ -5,7 +5,7 @@ https://error-affirmations.netlify.app/
 
 ### **Preview**
 
-<img src="./images/notificationbar.png" alt="Notification-Affirmations-Example" width="800"/>
+<img src="./images/beepboop.png" alt="Notification-Affirmations-Example" width="800" />
 
 ## **Features**
 
@@ -29,6 +29,8 @@ This extension also offers a great addition to your VS Code notification window.
     "notificationsInfoIcon.foreground": "#de0000",
   }
 ```
+
+<img src="./images/notificationbar.png" alt="Notification-Affirmations-Example" width="800"/>
 
 ### **Commands**
 
