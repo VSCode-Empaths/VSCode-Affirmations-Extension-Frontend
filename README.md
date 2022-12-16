@@ -3,6 +3,10 @@
 Error Affirmations is a VSCode extension that give you much needed code-related affirmations.
 https://error-affirmations.netlify.app/
 
+### **Preview**
+
+<img src="./images/notificationbar.png" alt="Notification-Affirmations-Example" width="800"/>
+
 ## **Features**
 
 ### **Website**
@@ -18,6 +22,31 @@ A general affirmation pops up on launch of VSCode.
 
 Throughout the day when you feel like you need an affirmation, you can fn+F1 to open the command palette and select an affirmation by category ("Get an error affirmation", "Get a TDD affirmation", or "Get a will to go on affirmation").
 
+<br>
+
+## **Check out our other app!**
+
+#### **Error Affirmations** - Jest Reporter:
+
+Error Affirmations Jest Reporter gives you much needed code-related affirmations in your terminal whenever your tests fail.
+
+https://www.npmjs.com/package/error-affirmations
+
+GitHub - https://github.com/VSCode-Empaths/VSCode-Affirmations-Jest-Reporter
+
+<br>
+
+### **Preview**
+
+<img src="./images/Jest_Example_Default.png" alt="Error-Affirmations-Example" width="800"/>
+
+<br>
+
+### Customize with **Color** and **Border** Themes!!!
+
+<img src="./images/Jest_Example_Themes.png" alt="Error-Affirmations-Example" width="800"/>
+
+<br>
 ## **Meet the team**
 
 - Karl Wernsman - <a href="https://www.linkedin.com/in/karl-wernsman/" >LinkedIn</a>
