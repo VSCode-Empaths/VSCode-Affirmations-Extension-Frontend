@@ -18,6 +18,18 @@ https://error-affirmations.netlify.app/
 
 A general affirmation pops up on launch of VSCode.
 
+This extension also offers a great addition to your VS Code notification window. An affirming, tranquil notification bar based on a hash of the root directory name when opened. It does this by immediately writing three colors to the following settings in `.vscode/settings.json`:
+
+```javascript
+  "workbench.colorCustomizations": {
+    "notifications.border": "#000000",
+    "notifications.background": "#f7d0d0",
+    "notifications.foreground": "#060505",
+    "statusBarItem.errorBackground": "#060505",
+    "notificationsInfoIcon.foreground": "#de0000",
+  }
+```
+
 ### **Commands**
 
 Throughout the day when you feel like you need an affirmation, you can fn+F1 to open the command palette and select an affirmation by category ("Get an error affirmation", "Get a TDD affirmation", or "Get a will to go on affirmation").
