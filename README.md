@@ -63,6 +63,7 @@ GitHub - https://github.com/VSCode-Empaths/VSCode-Affirmations-Jest-Reporter
 <img src="./images/Jest_Example_Themes.png" alt="Error-Affirmations-Example" width="800"/>
 
 <br>
+
 ## **Meet the team**
 
 - Karl Wernsman - <a href="https://www.linkedin.com/in/karl-wernsman/" >LinkedIn</a>
