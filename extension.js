@@ -1,68 +1,70 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require("vscode");
 const { fetchAffirmations } = require("./fetch-utils.js");
-
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 async function activate(context) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log(
-    'Congratulations, your extension "VSCCode-Error-Affirmations" is now active!'
-  );
+    // Constants
+    // const AFFIRMATION_INTERVAL = 1000 * 60 * 15; // ms * s * m
+    const AFFIRMATION_INTERVAL = 1000; // ms * s * m
+    let CAT_IDS = {
+        DAILY: 1,
+        ERROR: 2,
+        TDD: 3,
+        WTGO: 4,
+    };
+    // State Variables
+    const affirmations = await fetchAffirmations();
 
-  // TODO FETCH ALL Affirmations by category.id (1 - Daily)
-  const affirmations = await fetchAffirmations();
-  const dailyAffirmations = affirmations.filter((row) => row.category_id == 1);
-  const randomNumber = Math.floor(Math.random() * dailyAffirmations.length);
-  vscode.window.showInformationMessage(dailyAffirmations[randomNumber].text);
+    // Set timer and call affirmation on timerTick
+    // setInterval(displayRandAffirmationByCat, AFFIRMATION_INTERVAL, affirmations, CAT_IDS.DAILY);
 
-  // TODO FETCH ALL Affirmations by category.id (2 - Error)
-  let errorCommand = await vscode.commands.registerCommand(
-    "error_affirmations.getAffirmation(error)",
-    async function () {
-      const errorAffirmations = affirmations.filter(
-        (row) => row.category_id == 2
-      );
-      const randomNumber = Math.floor(Math.random() * errorAffirmations.length);
-      vscode.window.showInformationMessage(
-        errorAffirmations[randomNumber].text
-      );
-    }
-  );
-  let tddCommand = await vscode.commands.registerCommand(
-    "error_affirmations.getAffirmation(TDD)",
-    async function () {
-      const tddAffirmations = affirmations.filter(
-        (row) => row.category_id == 3
-      );
-      const randomNumber = Math.floor(Math.random() * tddAffirmations.length);
-      vscode.window.showInformationMessage(tddAffirmations[randomNumber].text);
-    }
-  );
-  let willCommand = await vscode.commands.registerCommand(
-    "error_affirmations.getAffirmation(WTGO)",
-    async function () {
-      const willAffirmations = affirmations.filter(
-        (row) => row.category_id == 4
-      );
-      const randomNumber = Math.floor(Math.random() * willAffirmations.length);
-      vscode.window.showInformationMessage(willAffirmations[randomNumber].text);
-    }
-  );
+    // Display affirmation on page load
+    displayRandAffirmationByCat(affirmations, CAT_IDS.DAILY);
 
-  context.subscriptions.push(errorCommand, tddCommand, willCommand);
+    let errorCommand = vscode.commands.registerCommand(
+        "error_affirmations.getAffirmation(error)",
+        () => displayRandAffirmationByCat(affirmations, CAT_IDS.DAILY)
+    );
+    let tddCommand = vscode.commands.registerCommand("error_affirmations.getAffirmation(TDD)", () =>
+        displayRandAffirmationByCat(affirmations, CAT_IDS.TDD)
+    );
+    let willCommand = vscode.commands.registerCommand(
+        "error_affirmations.getAffirmation(WTGO)",
+        () => displayRandAffirmationByCat(affirmations, CAT_IDS.WTGO)
+    );
+
+    context.subscriptions.push(errorCommand, tddCommand, willCommand);
 }
 
 // This method is called when your extension is deactivated
 function deactivate() {}
 
 module.exports = {
-  activate,
-  deactivate,
+    activate,
+    deactivate,
 };
+
+function displayRandAffirmationByCat(affirmations, catId) {
+    const filteredAffirmations = filterAffirmations(affirmations, catId);
+    const selectedAffirmation = getRandAffirmation(filteredAffirmations);
+    displayAffirmation(selectedAffirmation);
+}
+
+function filterAffirmations(affirmations, catId) {
+    // Select all affirmations with matching catId
+    return affirmations.filter((row) => row.category_id == catId);
+}
+
+function getRandAffirmation(affirmations) {
+    // Create random index within bounds of affirmations arr
+    const randomIndex = Math.floor(Math.random() * affirmations.length);
+
+    // Return text of random affirmation
+    return affirmations[randomIndex].text;
+}
+
+function displayAffirmation(affirmation) {
+    vscode.window.showInformationMessage(affirmation);
+}

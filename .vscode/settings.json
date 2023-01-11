@@ -1,24 +1,29 @@
 {
-  "cSpell.words": ["Empaths", "erroraffirmations", "Wernsman", "WTGO"],
-  "editor.wordWrap": "on",
-  "liveServer.settings.donotShowInfoMsg": true,
-  "files.autoSave": "onFocusChange",
-  "workbench.startupEditor": "none",
-  "window.zoomLevel": 1,
-  "git.autofetch": true,
-  "tabnine.experimentalAutoImports": true,
-  "explorer.compactFolders": false,
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorCustomizations": {
-    "notifications.border": "#000000",
-    "notifications.background": "#f7d0d0",
-    "notifications.foreground": "#060505",
-    "statusBarItem.errorBackground": "#060505",
-    "notificationsInfoIcon.foreground": "#de0000",
-    "input.background": "#fde1e1",
-    "input.foreground": "#140101"
-  },
-  "workbench.iconTheme": "material-icon-theme"
+    "cSpell.words": [
+        "Empaths",
+        "erroraffirmations",
+        "Wernsman",
+        "WTGO"
+    ],
+    "editor.wordWrap": "on",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "files.autoSave": "onFocusChange",
+    "workbench.startupEditor": "none",
+    "window.zoomLevel": 1,
+    "git.autofetch": true,
+    "tabnine.experimentalAutoImports": true,
+    "explorer.compactFolders": false,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "workbench.colorCustomizations": {
+        "notifications.border": "#000000",
+        "notifications.background": "#f7d0d0",
+        "notifications.foreground": "#060505",
+        "statusBarItem.errorBackground": "#060505",
+        "notificationsInfoIcon.foreground": "#de0000",
+        "input.background": "#fde1e1",
+        "input.foreground": "#140101"
+    },
+    "prettier.printWidth": 100
 }
