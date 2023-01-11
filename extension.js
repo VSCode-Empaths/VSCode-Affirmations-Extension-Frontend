@@ -6,7 +6,7 @@ const { fetchAffirmations } = require("./fetch-utils.js");
  */
 async function activate(context) {
     // Constants
-    // const AFFIRMATION_INTERVAL = 1000 * 60 * 15; // ms * s * m
+    const AFFIRMATION_INTERVAL = 1000 * 60 * 15; // ms * s * m
     // const AFFIRMATION_INTERVAL = 1000; // ms * s * m
     let CAT_IDS = {
         DAILY: 1,
@@ -18,7 +18,7 @@ async function activate(context) {
     const affirmations = await fetchAffirmations();
 
     // Set timer and call affirmation on timerTick
-    // setInterval(displayRandAffirmationByCat, AFFIRMATION_INTERVAL, affirmations, CAT_IDS.DAILY);
+    setInterval(displayRandAffirmationByCat, AFFIRMATION_INTERVAL, affirmations, CAT_IDS.DAILY);
 
     // Display affirmation on page load
     displayRandAffirmationByCat(affirmations, CAT_IDS.DAILY);
