@@ -2,7 +2,7 @@
 
 ## **_"You are not defined by your code."_** <sub><sup>-VSCode Empaths</sup></sub>
 
-Error Affirmations is a VSCode extension that give you much needed code-related affirmations.
+Error Affirmations is a VSCode extension that gives you much needed code-related affirmations.
 https://error-affirmations.netlify.app/
 
 ### **Preview**
