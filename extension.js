@@ -4,53 +4,82 @@ const { fetchAffirmations } = require("./fetch-utils.js");
 /**
  * @param {vscode.ExtensionContext} context
  */
+
+/* CONSTANTS */
+const onCommand = vscode.commands.registerCommand;
+const MINUTE = 1000 * 60; // ms * s
+const TIMER_INTERVAL_OPTIONS = ["10 min", "15 min", "30 min", "60 min"];
+const ERROR_COMMAND = "error_affirmations.getAffirmation(error)";
+const TDD_COMMAND = "error_affirmations.getAffirmation(TDD)";
+const WTGO_COMMAND = "error_affirmations.getAffirmation(WTGO)";
+const TIMER_ON_COMMAND = "error_affirmations.setTimerOn";
+const TIMER_OFF_COMMAND = "error_affirmations.setTimerOff";
+const CAT_IDS = {
+    DAILY: 1,
+    ERROR: 2,
+    TDD: 3,
+    WTGO: 4,
+};
+
+// Main logic (Runs when extension is loaded up)
 async function activate(context) {
-    // Constants
-    // const AFFIRMATION_INTERVAL = 1000 * 60 * 15; // ms * s * m
-    const AFFIRMATION_INTERVAL = 1000; // ms * s * m
-    let CAT_IDS = {
-        DAILY: 1,
-        ERROR: 2,
-        TDD: 3,
-        WTGO: 4,
-    };
-    // State Variables
+    /* STATE */
     const affirmations = await fetchAffirmations();
     let timer = null;
+    let timerInterval = null;
 
-    // Display affirmation on page load
+    // Exit if we don't have any affirmations 😢
+    if (!affirmations) return;
+
+    // Display initial affirmation on page load
     displayRandAffirmationByCat(affirmations, CAT_IDS.DAILY);
 
-    // Display affirmations on command
-    let errorCommand = vscode.commands.registerCommand(
-        "error_affirmations.getAffirmation(error)",
-        () => displayRandAffirmationByCat(affirmations, CAT_IDS.DAILY)
+    // Display affirmations by category, on command
+    const errorCommand = onCommand(ERROR_COMMAND, () =>
+        displayRandAffirmationByCat(affirmations, CAT_IDS.ERROR)
     );
-    let tddCommand = vscode.commands.registerCommand("error_affirmations.getAffirmation(TDD)", () =>
+    const tddCommand = onCommand(TDD_COMMAND, () =>
         displayRandAffirmationByCat(affirmations, CAT_IDS.TDD)
     );
-    let willCommand = vscode.commands.registerCommand(
-        "error_affirmations.getAffirmation(WTGO)",
-        () => displayRandAffirmationByCat(affirmations, CAT_IDS.WTGO)
+    const willCommand = onCommand(WTGO_COMMAND, () =>
+        displayRandAffirmationByCat(affirmations, CAT_IDS.WTGO)
     );
-    let setTimerOn = vscode.commands.registerCommand("error_affirmations.setTimerOn", () => {
-        // Set timer and call affirmation on timerTick
-        timer = setInterval(
-            displayRandAffirmationByCat,
-            AFFIRMATION_INTERVAL,
-            affirmations,
-            CAT_IDS.DAILY
+
+    // Display affirmations on a timer
+    const setTimerOn = onCommand(TIMER_ON_COMMAND, async () => {
+        // Get time interval from user
+        const selectedInterval = await promptForTimeInterval();
+
+        // Check if valid input
+        if (!isValidTimeInterval(selectedInterval)) return;
+
+        // Parse out number from input
+        const parsedInterval = parseTimeInterval(selectedInterval);
+
+        // Set as new timerInterval (to be reused as default timer setting)
+        timerInterval = MINUTE * parsedInterval;
+
+        // Clear any existing timer
+        if (timer) clearInterval(timer);
+
+        vscode.window.showInformationMessage(
+            `Receiving Affirmations Every: ${parsedInterval} minutes 💕`
         );
+
+        // Set timer and call affirmation on timerTick
+        timer = setInterval(() => {
+            displayRandAffirmationByCat(affirmations, CAT_IDS.DAILY);
+        }, timerInterval);
     });
-    let setTimerOff = vscode.commands.registerCommand("error_affirmations.setTimerOff", () => {
+    const setTimerOff = onCommand(TIMER_OFF_COMMAND, () => {
         // Clear timer
-        clearInterval(timer);
+        if (timer) clearInterval(timer);
     });
 
     context.subscriptions.push(errorCommand, tddCommand, willCommand, setTimerOn, setTimerOff);
 }
 
-// This method is called when your extension is deactivated
+// This method is called when extension is deactivated
 function deactivate() {}
 
 module.exports = {
@@ -72,11 +101,32 @@ function filterAffirmations(affirmations, catId) {
 function getRandAffirmation(affirmations) {
     // Create random index within bounds of affirmations arr
     const randomIndex = Math.floor(Math.random() * affirmations.length);
-
     // Return text of random affirmation
     return affirmations[randomIndex].text;
 }
 
 function displayAffirmation(affirmation) {
     vscode.window.showInformationMessage(affirmation);
+}
+
+async function promptForTimeInterval() {
+    const quickPickOptions = {
+        placeHolder: "Select a time interval:",
+    };
+    const selection = await vscode.window.showQuickPick(TIMER_INTERVAL_OPTIONS, quickPickOptions);
+
+    return selection;
+}
+
+function isValidTimeInterval(selectedInterval) {
+    // Validate input by ensuring it exists and matches one of the TIMER_INTERVAL_OPTIONS
+    return selectedInterval || TIMER_INTERVAL_OPTIONS.includes(selectedInterval);
+}
+
+function parseTimeInterval(selectedInterval) {
+    // Parse selectedTimeInterval string to get numbers
+    // ex: '15 min' becomes '15'
+    const subStr = selectedInterval.substring(0, selectedInterval.indexOf(" "));
+    // Turn string into actual number
+    return parseInt(subStr);
 }

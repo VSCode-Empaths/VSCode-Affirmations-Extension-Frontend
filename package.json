@@ -35,7 +35,7 @@
             },
             {
                 "command": "error_affirmations.setTimerOn",
-                "title": "Set A Timer For Affirmations!"
+                "title": "Set Timer For Affirmations!"
             },
             {
                 "command": "error_affirmations.setTimerOff",
