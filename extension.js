@@ -6,8 +6,8 @@ const { fetchAffirmations } = require("./fetch-utils.js");
  */
 async function activate(context) {
     // Constants
-    const AFFIRMATION_INTERVAL = 1000 * 60 * 15; // ms * s * m
-    // const AFFIRMATION_INTERVAL = 1000; // ms * s * m
+    // const AFFIRMATION_INTERVAL = 1000 * 60 * 15; // ms * s * m
+    const AFFIRMATION_INTERVAL = 1000; // ms * s * m
     let CAT_IDS = {
         DAILY: 1,
         ERROR: 2,
@@ -16,13 +16,12 @@ async function activate(context) {
     };
     // State Variables
     const affirmations = await fetchAffirmations();
-
-    // Set timer and call affirmation on timerTick
-    setInterval(displayRandAffirmationByCat, AFFIRMATION_INTERVAL, affirmations, CAT_IDS.DAILY);
+    let timer = null;
 
     // Display affirmation on page load
     displayRandAffirmationByCat(affirmations, CAT_IDS.DAILY);
 
+    // Display affirmations on command
     let errorCommand = vscode.commands.registerCommand(
         "error_affirmations.getAffirmation(error)",
         () => displayRandAffirmationByCat(affirmations, CAT_IDS.DAILY)
@@ -34,8 +33,21 @@ async function activate(context) {
         "error_affirmations.getAffirmation(WTGO)",
         () => displayRandAffirmationByCat(affirmations, CAT_IDS.WTGO)
     );
+    let setTimerOn = vscode.commands.registerCommand("error_affirmations.setTimerOn", () => {
+        // Set timer and call affirmation on timerTick
+        timer = setInterval(
+            displayRandAffirmationByCat,
+            AFFIRMATION_INTERVAL,
+            affirmations,
+            CAT_IDS.DAILY
+        );
+    });
+    let setTimerOff = vscode.commands.registerCommand("error_affirmations.setTimerOff", () => {
+        // Clear timer
+        clearInterval(timer);
+    });
 
-    context.subscriptions.push(errorCommand, tddCommand, willCommand);
+    context.subscriptions.push(errorCommand, tddCommand, willCommand, setTimerOn, setTimerOff);
 }
 
 // This method is called when your extension is deactivated
