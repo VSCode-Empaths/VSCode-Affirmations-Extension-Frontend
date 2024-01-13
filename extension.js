@@ -18,9 +18,8 @@ async function activate(context) {
 
   // TODO FETCH ALL Affirmations by category.id (1 - Daily)
   const affirmations = await fetchAffirmations();
-  const dailyAffirmations = affirmations.filter((row) => row.category_id == 1);
-  const randomNumber = Math.floor(Math.random() * dailyAffirmations.length);
-  vscode.window.showInformationMessage(dailyAffirmations[randomNumber].text);
+    const randomNumber = Math.floor(Math.random() * affirmations.length);
+  vscode.window.showInformationMessage(affirmations[randomNumber].text);
 
   // TODO FETCH ALL Affirmations by category.id (2 - Error)
   let errorCommand = await vscode.commands.registerCommand(
