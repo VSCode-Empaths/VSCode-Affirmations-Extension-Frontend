@@ -1,5 +1,5 @@
 const fetch = require("cross-fetch");
-const API_URL = "https://error-affirmations.herokuapp.com";
+const API_URL = "https://error-affirmations-api.fly.dev";
 
 async function fetchAffirmations() {
     const resp = await fetch(`${API_URL}/api/v1/affirmations`, {
